@@ -1,0 +1,31 @@
+{
+
+  "manifest_version": 2,
+  "name": "Context Menu Search",
+  "description": "An easy way to act a context search with a one-time selected search provider.",
+  "version": "0.1.0",
+  "default_locale": "en",
+
+  "icons": {
+    "48": "search.svg"
+  },
+
+  "permissions": [
+    "contextMenus",
+    "search"
+  ],
+
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+
+  "applications": {
+    "gecko": {
+      "id": "{2a3ce252-19ba-461f-8fe5-308e280ded54}",
+      "strict_min_version": "63.0a1"
+    }
+  }
+
+}
