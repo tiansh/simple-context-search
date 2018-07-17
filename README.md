@@ -1,6 +1,6 @@
-# Context Menu Search
+# Simple Context Search
 
-An easy way to act a context search with a one-time selected search provider.
+An easy way to act a context search with a one-time selected search provider. Context Search should be Simple.
 
 Notice: This extension only support Firefox 63.0a1 and above which is currently on Nightly channel.
 

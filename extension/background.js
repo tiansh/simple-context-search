@@ -7,29 +7,26 @@ browser.contextMenus.create({
   contexts: ['link', 'selection'],
 });
 
-const hex = {
-  encode: str => [...new TextEncoder().encode(str)].map(x => x.toString(16).padStart(2, 0)).join(''),
-  decode: str => new TextDecoder().decode(new Uint8Array(str.match(/../g).map(x => parseInt(x, 16)))),
-};
-
 const menuItemList = [];
 
 browser.contextMenus.onHidden.addListener(() => {
-  menuItemList.forEach(id => browser.contextMenus.remove(id));
+  menuItemList.splice(0).forEach((name, index) => {
+    browser.contextMenus.remove(menuPrefix + index);
+  });
   browser.contextMenus.refresh();
 });
 
 browser.contextMenus.onShown.addListener(async (info, tab) => {
   const searchList = await browser.search.get();
-  searchList.forEach(search => {
+  searchList.forEach((search, index) => {
     const menuItem = {
-      id: menuPrefix + hex.encode(search.name),
+      id: menuPrefix + index,
       parentId: rootMenu,
       icons: { '16': search.favIconUrl },
       title: search.name,
     };
-    menuItemList.push(menuItem.id);
     browser.contextMenus.create(menuItem);
+    menuItemList[index] = search.name;
   });
   browser.contextMenus.refresh();
 });
@@ -37,7 +34,8 @@ browser.contextMenus.onShown.addListener(async (info, tab) => {
 browser.contextMenus.onClicked.addListener((info, tab) => {
   const menuItemId = info.menuItemId;
   if (!menuItemId.startsWith(menuPrefix)) return;
-  const searchProvider = hex.decode(menuItemId.slice(menuPrefix.length));
+  const index = menuItemId.slice(menuPrefix.length);
+  const searchProvider = menuItemList[index];
   const searchTerms = (info.selectionText || info.linkText).trim();
   browser.search.search(searchProvider, searchTerms);
 });
