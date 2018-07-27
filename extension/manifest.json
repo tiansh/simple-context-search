@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "Simple Context Search",
   "description": "An easy way to act a context search with a one-time selected search provider. Context Search should be Simple.",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "default_locale": "en",
 
   "icons": {
@@ -11,7 +11,8 @@
   },
 
   "permissions": [
-    "contextMenus"
+    "contextMenus",
+    "search"
   ],
 
   "background": {
