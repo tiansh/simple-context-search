@@ -40,6 +40,10 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
   const index = menuItemId.slice(menuPrefix.length);
   const searchProvider = menuItemList[index];
   const searchTerms = (info.selectionText || info.linkText).trim();
-  browser.search.search(searchProvider, searchTerms);
+  try {
+    browser.search.search({ engine: searchProvider, query: searchTerms });
+  } catch (e) {
+    browser.search.search(searchProvider, searchTerms);
+  }
 });
 
