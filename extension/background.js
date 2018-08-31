@@ -44,10 +44,16 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
   const index = menuItemId.slice(menuPrefix.length);
   const searchProvider = menuItemList[index];
   const searchTerms = (info.selectionText || info.linkText).trim();
-  try {
-    browser.search.search({ engine: searchProvider, query: searchTerms });
-  } catch (e) {
-    browser.search.search(searchProvider, searchTerms);
-  }
+  const secondaryActive = info.modifiers.includes('Ctrl');
+  const listener = newTab => {
+    browser.tabs.onCreated.removeListener(listener);
+    if (secondaryActive) {
+      const activeTab = newTab.active ? tab : newTab;
+      browser.tabs.update(activeTab.id, { active: true });
+    }
+    browser.tabs.move(newTab.id, { index: tab.index + 1 });
+  };
+  browser.tabs.onCreated.addListener(listener);
+  browser.search.search({ engine: searchProvider, query: searchTerms });
 });
 
