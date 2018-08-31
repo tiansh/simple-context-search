@@ -2,8 +2,8 @@
 
   "manifest_version": 2,
   "name": "Simple Context Search",
-  "description": "An easy way to act a context search with a one-time selected search provider. Context Search should be Simple.",
-  "version": "0.2.6",
+  "description": "An easy way to act a context searching with one-time selected search provider. Context Search should be Simple.",
+  "version": "1.0.0",
 
   "icons": {
     "48": "search.svg"
@@ -23,7 +23,7 @@
   "applications": {
     "gecko": {
       "id": "{2a3ce252-19ba-461f-8fe5-308e280ded54}",
-      "strict_min_version": "63.0a1"
+      "strict_min_version": "63.0"
     }
   }
 
