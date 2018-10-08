@@ -70,23 +70,24 @@ browser.contextMenus.onShown.addListener(async (info, tab) => {
   browser.contextMenus.refresh();
 });
 
-browser.contextMenus.onClicked.addListener((info, tab) => {
+browser.contextMenus.onClicked.addListener(async (info, tab) => {
   const menuItemId = info.menuItemId;
   if (!menuItemId.startsWith(menuPrefix)) return;
   const index = menuItemId.slice(menuPrefix.length);
   const searchProvider = menuItemList[index];
   const searchTerms = (info.selectionText || info.linkText).trim();
-  const secondaryActive = info.modifiers.includes('Ctrl') ||
+  const inactive = info.modifiers.includes('Ctrl') ||
     info.modifiers.includes('Command');
-  const listener = newTab => {
-    browser.tabs.onCreated.removeListener(listener);
-    if (secondaryActive) {
-      const activeTab = newTab.active ? tab : newTab;
-      browser.tabs.update(activeTab.id, { active: true });
-    }
-    browser.tabs.move(newTab.id, { index: tab.index + 1 });
-  };
-  browser.tabs.onCreated.addListener(listener);
-  browser.search.search({ engine: searchProvider, query: searchTerms });
+  const newTab = await browser.tabs.create({
+    active: !inactive,
+    index: tab.index + 1,
+    url: 'about:blank',
+    windowId: tab.windowId,
+  });
+  browser.search.search({
+    engine: searchProvider,
+    query: searchTerms,
+    tabId: newTab.id,
+  });
 });
 
