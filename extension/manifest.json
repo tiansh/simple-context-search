@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "Simple Context Search",
   "description": "An easy way to act a context searching with one-time selected search provider. Context Search should be Simple.",
-  "version": "1.0.0",
+  "version": "1.1.0",
 
   "icons": {
     "48": "search.svg"
