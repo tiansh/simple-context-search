@@ -4,6 +4,7 @@
   "name": "Simple Context Search",
   "description": "An easy way to act a context searching with one-time selected search provider. Context Search should be Simple.",
   "version": "1.2.0",
+  "default_locale": "en",
 
   "icons": {
     "48": "search.svg"
@@ -11,13 +12,19 @@
 
   "permissions": [
     "contextMenus",
-    "search"
+    "search",
+    "storage"
   ],
 
   "background": {
     "scripts": [
       "background.js"
     ]
+  },
+
+  "options_ui": {
+    "browser_style": false,
+    "page": "options.html"
   },
 
   "applications": {

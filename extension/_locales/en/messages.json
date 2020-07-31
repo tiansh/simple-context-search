@@ -1,0 +1,8 @@
+{
+  "search": {
+    "message": "Search"
+  },
+  "loadInBackground": {
+    "message": "Load search result in background"
+  }
+}

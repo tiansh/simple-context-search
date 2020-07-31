@@ -1,0 +1,22 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+  <link rel="stylesheet" href="chrome://global/skin/in-content/common.css" />
+  <style>
+body { font: message-box; font-size: 15px; line-height: 26px; cursor: default; -moz-user-select: none; user-select: none; padding: 20px 5px; margin: 0; min-height: 300px; } 
+body::after { content: " "; background: var(--in-content-box-background); position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: -1; }
+input[type="checkbox"] { vertical-align: -4px; }
+  </style>
+</head>
+<body>
+  <div class="option-item">
+    <label>
+      <input type="checkbox" name="loadInBackground" data-initial="false" />
+      <span data-i18n="loadInBackground"></span>
+    </label>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
