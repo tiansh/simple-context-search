@@ -1,1 +1,8 @@
-{"search":{"message":"Поиск"}}
+{
+  "search": {
+    "message": "Поиск"
+  },
+  "loadInBackground": {
+    "message": "Открывать результаты поиска в фоне"
+  }
+}
